@@ -46,18 +46,6 @@ pca = PCA(n_components=0.7)
 pca_result = pca.fit_transform(scaled_data)
 print(pca.n_components_)  # 선택된 주성분 수
 
-### 📊 상관관계 분석
-① 전체 상관관계 히트맵
-
-sns.heatmap(car_df.corr(), annot=True, cmap='coolwarm')
-② 상관계수 높은 변수쌍 추출
-
-corr_matrix = car_df.select_dtypes(include='number').corr()
-corr_pairs = corr_matrix.unstack()
-sorted_corr = corr_pairs[corr_pairs.index[0] != corr_pairs.index[1]].drop_duplicates()
-sorted_corr = sorted_corr.reindex(sorted_corr.abs().sort_values(ascending=False).index)
-print(sorted_corr.head(10))
-
 ### 🌍 국가별 브랜드 개수
 
 car_df.groupby('country')['brand'].nunique()
